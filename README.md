@@ -1,15 +1,9 @@
 # Multi-Container Infrastructure Setup and Deployment Using Docker Compose
 
 - **Course:** Service-Oriented Architecture (SOA)
-- **Student Name:** Uday
+- **Student Name:** Vempati Uday Kiran
 - **Student ID:** 2400030380
 - **Repository:** https://github.com/uday30380/2400030380-SOAEndSemSkill.git
-
----
-
-## Aim
-
-To build, containerize, and deploy a Spring Boot REST API connected to a PostgreSQL database using Docker Compose, communicating over a shared bridge network (`soa-network`).
 
 ---
 
