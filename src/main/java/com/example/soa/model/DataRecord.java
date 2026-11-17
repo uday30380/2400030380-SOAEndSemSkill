@@ -7,12 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * JPA Entity representing a record in the PostgreSQL database.
- * Mapped to table 'data_record'.
- *
- * Student ID: 2400030380
- */
+// Entity mapped to PostgreSQL table 'data_record'
+// Student ID: 2400030380
 @Entity
 @Table(name = "data_record")
 public class DataRecord {
@@ -24,16 +20,16 @@ public class DataRecord {
     @Column(name = "message", nullable = false)
     private String message;
 
-    // Default No-Args Constructor required by JPA
+    // Default constructor
     public DataRecord() {
     }
 
-    // Convenience constructor
+    // Constructor with message
     public DataRecord(String message) {
         this.message = message;
     }
 
-    // All-Args Constructor
+    // Constructor with id and message
     public DataRecord(Long id, String message) {
         this.id = id;
         this.message = message;
@@ -58,9 +54,6 @@ public class DataRecord {
 
     @Override
     public String toString() {
-        return "DataRecord{" +
-                "id=" + id +
-                ", message='" + message + '\'' +
-                '}';
+        return "DataRecord [id=" + id + ", message=" + message + "]";
     }
 }

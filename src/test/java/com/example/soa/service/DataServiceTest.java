@@ -2,7 +2,6 @@ package com.example.soa.service;
 
 import com.example.soa.model.DataRecord;
 import com.example.soa.repository.DataRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,12 +11,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+// Unit test for DataService logic
+// Student ID: 2400030380
 @ExtendWith(MockitoExtension.class)
-class DataServiceTest {
+public class DataServiceTest {
 
     @Mock
     private DataRepository dataRepository;
@@ -25,16 +28,10 @@ class DataServiceTest {
     @InjectMocks
     private DataService dataService;
 
-    private DataRecord testRecord;
-
-    @BeforeEach
-    void setUp() {
-        testRecord = new DataRecord(1L, "SOA Docker Compose Lab");
-    }
-
     @Test
-    void testGetAllRecords() {
-        when(dataRepository.findAll()).thenReturn(Arrays.asList(testRecord));
+    public void testGetAllRecords() {
+        DataRecord record = new DataRecord(1L, "SOA Docker Compose Lab");
+        when(dataRepository.findAll()).thenReturn(Arrays.asList(record));
 
         List<DataRecord> records = dataService.getAllRecords();
 
@@ -45,14 +42,16 @@ class DataServiceTest {
     }
 
     @Test
-    void testSaveRecord() {
-        when(dataRepository.save(any(DataRecord.class))).thenReturn(testRecord);
+    public void testSaveRecord() {
+        DataRecord record = new DataRecord("SOA Docker Test");
+        DataRecord savedRecord = new DataRecord(1L, "SOA Docker Test");
+        when(dataRepository.save(record)).thenReturn(savedRecord);
 
-        DataRecord saved = dataService.saveRecord(new DataRecord("SOA Docker Compose Lab"));
+        DataRecord result = dataService.saveRecord(record);
 
-        assertNotNull(saved);
-        assertEquals(1L, saved.getId());
-        assertEquals("SOA Docker Compose Lab", saved.getMessage());
-        verify(dataRepository, times(1)).save(any(DataRecord.class));
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
+        assertEquals("SOA Docker Test", result.getMessage());
+        verify(dataRepository, times(1)).save(record);
     }
 }

@@ -1,5 +1,5 @@
 services:
-  # Database Service (PostgreSQL)
+  # Database container
   app-db:
     image: postgres:16
     container_name: soa-postgres
@@ -21,7 +21,7 @@ services:
       retries: 5
       start_period: 10s
 
-  # Application Service (Spring Boot)
+  # Application container
   app:
     build:
       context: .
