@@ -1,0 +1,54 @@
+services:
+  # Database Service (PostgreSQL)
+  app-db:
+    image: postgres:16
+    container_name: soa-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: soa_db
+      POSTGRES_USER: soa_user
+      POSTGRES_PASSWORD: soa_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - soa-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U soa_user -d soa_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Application Service (Spring Boot)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: soa-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: app-db
+      DB_PORT: 5432
+      DB_NAME: soa_db
+      DB_USER: soa_user
+      DB_PASSWORD: soa_password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://app-db:5432/soa_db
+      SPRING_DATASOURCE_USERNAME: soa_user
+      SPRING_DATASOURCE_PASSWORD: soa_password
+    depends_on:
+      app-db:
+        condition: service_healthy
+    networks:
+      - soa-network
+
+networks:
+  soa-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

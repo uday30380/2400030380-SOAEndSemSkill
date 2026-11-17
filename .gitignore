@@ -1,0 +1,31 @@
+# Compiled binary and package artifacts
+target/
+*.class
+
+# Environment files and secrets
+.env
+*.env.local
+
+# Log files
+*.log
+logs/
+
+# Eclipse / Spring Tool Suite (STS) metadata
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA metadata
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Visual Studio Code metadata
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+Desktop.ini
