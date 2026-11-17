@@ -1,6 +1,5 @@
 # Multi-Container Infrastructure Setup and Deployment Using Docker Compose
 
-- **Course:** Service-Oriented Architecture (SOA)
 - **Student Name:** Vempati Uday Kiran
 - **Student ID:** 2400030380
 - **Repository:** https://github.com/uday30380/2400030380-SOAEndSemSkill.git
